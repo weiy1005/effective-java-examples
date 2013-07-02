@@ -5,11 +5,12 @@ import java.util.EnumMap;
 import java.util.Map;
 
 public enum Phase {
-	SOLID, LIQUID, GAS;
+	SOLID, LIQUID, GAS,PLASMA;
 
 	public enum Transition {
 		MELT(SOLID, LIQUID), FREEZE(LIQUID, SOLID), BOIL(LIQUID, GAS), CONDENSE(
-				GAS, LIQUID), SUBLIME(SOLID, GAS), DEPOSIT(GAS, SOLID);
+				GAS, LIQUID), SUBLIME(SOLID, GAS), DEPOSIT(GAS, SOLID),
+				IONIZE(GAS,PLASMA),DEIONIZE(PLASMA,GAS);
 
 		private final Phase src;
 		private final Phase dst;
