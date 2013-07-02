@@ -38,4 +38,14 @@ enum PayrollDay {
 			return basePay + overtimePay(hoursWorked, payRate);
 		}
 	}
+	
+	// Test program to perform all operations on given operands
+	public static void main(String[] args) {
+		for (PayrollDay pay : PayrollDay.values())
+			System.out.printf("%s pay=%s %n",  pay,pay.pay(8,1));
+		
+		//９時間働いたら
+		PayrollDay monday2 = PayrollDay.MONDAY;
+		System.out.printf("%s pay=%s %n",  monday2,monday2.pay(9, 1));
+	}
 }

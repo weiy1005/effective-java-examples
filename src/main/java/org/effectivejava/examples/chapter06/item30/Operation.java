@@ -4,6 +4,8 @@ package org.effectivejava.examples.chapter06.item30;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.omg.CORBA.TIMEOUT;
+
 public enum Operation {
 	PLUS("+") {
 		double apply(double x, double y) {
@@ -49,12 +51,29 @@ public enum Operation {
 	public static Operation fromString(String symbol) {
 		return stringToEnum.get(symbol);
 	}
+	
+	//欠けてるメソッドをシミュレートする？？
+	public static Operation inverse(Operation op){
+		switch (op) {
+			case PLUS:return Operation.MINUS;
+			case MINUS:return Operation.PLUS;
+			case TIMES:return Operation.DIVIDE;
+			case DIVIDE:return Operation.TIMES;
+			default:
+				throw new AssertionError("Unknown op:"+op);
+		}
+	}
 
 	// Test program to perform all operations on given operands
 	public static void main(String[] args) {
-		double x = Double.parseDouble(args[0]);
-		double y = Double.parseDouble(args[1]);
-		for (Operation op : Operation.values())
+		//double x = Double.parseDouble(args[0]);
+		//double y = Double.parseDouble(args[1]);
+		double x = 16.0;
+		double y = 8.0;
+		for (Operation op : Operation.values()){
 			System.out.printf("%f %s %f = %f%n", x, op, y, op.apply(x, y));
+			System.out.printf("inverse %f %s %f = %f%n", x, Operation.inverse(op), y, Operation.inverse(op).apply(x, y));
+		}
+		
 	}
 }
